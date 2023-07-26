@@ -20,6 +20,8 @@ class Product(models.Model):
     title = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='images/')
+
+
     def __str__(self):
         return f' ваш товар {self.category} - {self.title}'
 
@@ -33,8 +35,10 @@ class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
+
     def __str__(self):
-        return f"{self.user} - {self.product.category} { self.product.title} - количество-{self.quantity} - цена :{self.quantity * self.product.price}"
+        return f"{self.user} - {self.product.category} { self.product.title} " \
+               f"- количество-{self.quantity} - цена :{self.quantity * self.product.price}"
 
     class Meta:
         verbose_name = ('Корзина')
