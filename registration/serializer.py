@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from registration.models import *
 from registration.send_sms import send_activation_sms
 
 User = get_user_model()
+
 
 class RegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=6, max_length=8, required=True, write_only=True)
@@ -19,12 +21,12 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
         if password != password_confirmation:
             raise serializers.ValidationError(
-                'пароли не совподают'
+                'пароли не совпадают'
             )
 
         if password.isdigit() or password.isalpha():
             raise serializers.ValidationError(
-                'пароль должен содержать цыфры и буквы'
+                'пароль должен содержать цифры и буквы'
             )
 
         return attrs
@@ -32,6 +34,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
 
 class ActivationSerializer(serializers.Serializer):
     code = serializers.CharField(required=True)
@@ -48,6 +51,7 @@ class ActivationSerializer(serializers.Serializer):
             user.save()
         except:
             self.fail('неверный код')
+
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -72,12 +76,12 @@ class RegisterPhoneSerializer(serializers.ModelSerializer):
 
         if password != password_confirmation:
             raise serializers.ValidationError(
-                'пароли не совподают'
+                'пароли не совпадают'
             )
 
         if password.isdigit() or password.isalpha():
             raise serializers.ValidationError(
-                'пароль должен содержать цыфры и буквы'
+                'пароль должен содержать цифры и буквы'
             )
 
         return attrs
@@ -87,3 +91,8 @@ class RegisterPhoneSerializer(serializers.ModelSerializer):
         send_activation_sms(user.phone_number, user.activation_code)
         return user
 
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = CustomUser, UserManager
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

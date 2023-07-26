@@ -39,6 +39,8 @@ class UserManager(BaseUserManager):
 
 
 
+
+
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
