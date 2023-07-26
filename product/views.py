@@ -1,10 +1,10 @@
-from rest_framework import generics, permissions
+from rest_framework import permissions, viewsets
 from .models import Category, Product, CartItem
 from .permissions import IsAuthorOrAdmin, IsAuthor
 from .serializers import CategorySerializer, ProductSerializer, CartItemSerializer
 
 
-class CategoryListCreateView(generics.ListCreateAPIView):
+class CategoryAPIView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
@@ -16,7 +16,7 @@ class CategoryListCreateView(generics.ListCreateAPIView):
         return (permissions.AllowAny(),)
 
 
-class ProductListCreateView(generics.ListCreateAPIView):
+class ProductAPIView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
@@ -27,7 +27,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
             return (IsAuthor(),)
         return (permissions.AllowAny(),)
 
-class CartListCreateView(generics.ListCreateAPIView):
+class CartListAPIView(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
 

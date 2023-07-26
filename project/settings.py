@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'registration',
     'product',
     'comment',
+    'history_orders',
 ]
 
 MIDDLEWARE = [
