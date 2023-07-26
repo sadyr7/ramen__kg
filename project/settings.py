@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     #MYAPPS
     'registration',
     'product',
+    'history_orders',
+
 ]
 
 MIDDLEWARE = [
