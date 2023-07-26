@@ -20,6 +20,9 @@ class Product(models.Model):
     title = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='images')
+    # description = models.CharField(max_length=250)
+    likes = modles.DecimalField(max_digits=10)
+
     def __str__(self):
         return f' ваш товар {self.title}'
 
@@ -38,7 +41,7 @@ class CartItem(models.Model):
         return total_price
 
     def __str__(self):
-        return f"{self.user} - {self.product.title} - количество: {self.quantity} - цена {self.total_price}"
+        return f"{self.user} - {self.product.title} - количество: {self.quantity} - цена {self.quantity * self.total_price}"
 
     class Meta:
         verbose_name = _('Корзина')
