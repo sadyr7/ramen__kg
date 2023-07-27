@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'rest_framework_simplejwt',
     'twilio',
 
     #MYAPPS
@@ -89,7 +88,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hackaton',
-        'USER': 'darinaibragimova',
+        'USER': 'sadyrbek',
         'PASSWORD': '1',
         'HOST': '127.0.0.1',
         'PORT': '5432'
@@ -162,3 +161,5 @@ EMAIL_HOST_PASSWORD = 'lxdlwbubuykzarrx'
 TWILIO_SID='AC3484c5eacb24b9534481d8e88b20e55f'
 TWILIO_AUTH_TOKEN='f63a889b7c69292423fbbe84fd500855'
 TWILIO_SENDER_PHONE='+14322958274'
+
+TELEGRAM_BOT_API_KEY = '6484579916:AAENxzN28FVRRHn325YSDhNVu8S46Ee66Bc'
